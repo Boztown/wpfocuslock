@@ -2,6 +2,10 @@
   position: relative;
 }
 
+#focuslock-image-wrapper > img {
+  cursor: crosshair;
+}
+
 .focuslock-dot {
   position: absolute;
   background: blue;
