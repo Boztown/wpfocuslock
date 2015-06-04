@@ -31,7 +31,7 @@ class WP_FocusLock_Public {
    * @return  void
    */
   public function __construct ( $file = '', $version = '1.0.0' ) {
-    //add_action( 'wp_enqueue_scripts', array( $this, 'public_enqueue_styles' ), 10, 1 );
+    add_action( 'wp_enqueue_scripts', array( $this, 'public_enqueue_styles' ), 10, 1 );
     add_action( 'wp_enqueue_scripts', array( $this, 'public_enqueue_scripts' ), 10, 1 );
   }
 
@@ -49,5 +49,13 @@ class WP_FocusLock_Public {
    */
   public function public_enqueue_scripts() {
     wp_enqueue_script( 'jquery_focuspoint', plugin_dir_url( __FILE__ ) . 'js/jquery.focuspoint.min.js', array('jquery'), $this->_version, true );
+    wp_enqueue_script( 'wp_focuslock', plugin_dir_url( __FILE__ ) . 'js/wp-focuslock.js', array('jquery', 'jquery_focuspoint'), $this->_version, true );
   }
+}
+
+
+function focuslock_image($attachment_id) {
+  $attachment = get_post($attachment_id);
+  $coords = get_post_meta($attachment_id, 'focuslock_coords', true);
+  print_r($coords);
 }
