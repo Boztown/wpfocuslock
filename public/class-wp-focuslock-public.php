@@ -40,7 +40,7 @@ class WP_FocusLock_Public {
    *
    */
   public function public_enqueue_styles() {
-    wp_enqueue_style( 'FocusLockPublicStyles', plugin_dir_url( __FILE__ ) . 'css/focuslock-admin.css');
+    wp_enqueue_style( 'jquery_focuspoint_css', plugin_dir_url( __FILE__ ) . 'css/focuspoint.css');
   }
 
   /**
