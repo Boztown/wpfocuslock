@@ -1,0 +1,10 @@
+#focuslock-image-wrapper {
+  position: relative;
+}
+
+.focuslock-dot {
+  position: absolute;
+  background: blue;
+  border-radius: 30px;
+  opacity: .8;
+}

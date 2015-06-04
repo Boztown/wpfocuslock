@@ -16,7 +16,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Load plugin class files
-require_once( 'includes/class-wp-focuslock.php' );
+require_once( 'admin/class-wp-focuslock.php' );
 
 /**
  * Returns the main instance of BirdsEye_Plugin to prevent the need to use globals.

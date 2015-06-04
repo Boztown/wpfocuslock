@@ -110,8 +110,8 @@ class WP_FocusLock {
     //dd_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 10 );
 
     // Load admin JS & CSS
-    //add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), 10, 1 );
     add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_styles' ), 10, 1 );
+    add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), 10, 1 );
   } // End __construct ()
 
 
@@ -139,10 +139,10 @@ class WP_FocusLock {
 
   public function media_field_setup($form_fields, $attachment) {
 
-    $image = wp_get_attachment_image_src( $attachment->ID, 'large' );
+    $image = wp_get_attachment_image_src( $attachment->ID, 'medium' );
 
     $html = '<div class="focuslock-ui hide-if-no-js">';
-    $html = '<div class="image-wrapper">';
+    $html = '<div id="focuslock-image-wrapper" class="image-wrapper">';
     $html .= '<img src="' . $image[0] . '" />';
     $html .= '</div>'; // end image-wrapper
     $html .= '</div>'; // end focuslock-ui
@@ -162,7 +162,15 @@ class WP_FocusLock {
    * @since    1.0.0
    */
   public function admin_enqueue_styles() {
+    wp_enqueue_style( 'FocusLockAdminStyles', plugin_dir_url( __FILE__ ) . 'css/focuslock-admin.css');
+  }
 
-    wp_enqueue_style( 'FocusLockAdminStyles', plugin_dir_url( __FILE__ ) . 'css/focuslock-admin.css', array(), $this->_version, 'all' );
+  /**
+   * Register the scripts for the admin area.
+   *
+   * @since    1.0.0
+   */
+  public function admin_enqueue_scripts() {
+    wp_enqueue_script( 'FocusLockAdminScripts', plugin_dir_url( __FILE__ ) . 'js/main.js', array('jquery'), $this->_version, true );
   }
 }
