@@ -1,19 +1,47 @@
-jQuery(document).ready(function( $ ) {
+if ( ! window.console )
+  window.console = { log: function(){ } };
 
-  var $hiddenCoordsField = $('[name$="[focuslock_coords]"]');
-  var $hiddenMouseCoordsField = $('[name$="[focuslock_mouse_coords]"]');
-  var $imageWrapper = $('#focuslock-image-wrapper');
-  var dotSize = '22';
+  var $hiddenCoordsField;
+  var $hiddenMouseCoordsField;
+  var $imageWrapper;
+  var focusLockedInited = false;
 
-  if ($hiddenMouseCoordsField.val().length > 0) {
-    var coords = $hiddenMouseCoordsField.val().split('|');
-    createDot(coords[1], coords[0]);
+  jQuery(document).ready(function( $ ) {
+    initFocuslock();
+  });
+  
+  function setElements() {
+    $hiddenCoordsField = jQuery('[name$="[focuslock_coords]"]');
+    $hiddenMouseCoordsField = jQuery('[name$="[focuslock_mouse_coords]"]');
+    $imageWrapper = jQuery('#focuslock-image-wrapper');
   }
 
-  $("#focuslock-image-wrapper > img").click(function (ev) {
+  function initFocuslock() {
 
-    var imageW = $(this).width();
-    var imageH = $(this).height();
+    if (!focusLockedInited) {
+      setElements();
+
+      if ($hiddenMouseCoordsField && $hiddenMouseCoordsField.val().length > 0) {
+        var coords = $hiddenMouseCoordsField.val().split('|');
+        createDot(coords[1], coords[0]);
+      }
+
+      focusLockedInited = true;  
+    }  
+  }
+
+  var dotSize = '22';
+
+  jQuery(document).on('mouseover', "#focuslock-image-wrapper > img", function (ev) {
+    initFocuslock();
+  });
+
+  jQuery(document).on('click', "#focuslock-image-wrapper > img", function (ev) {
+
+    setElements();
+
+    var imageW = jQuery(this).width();
+    var imageH = jQuery(this).height();
 
     var mouseX = ev.offsetX;
     var mouseY = ev.offsetY;
@@ -42,12 +70,10 @@ jQuery(document).ready(function( $ ) {
 
   function createDot(top, left) {
     $imageWrapper.append(
-      $('<div></div>')
+      jQuery('<div></div>')
           .addClass('focuslock-dot')
           .css('top', top + 'px')
           .css('left', left + 'px')
           .css('width', dotSize + 'px')
           .css('height', dotSize + 'px'))    
   }
-
-});

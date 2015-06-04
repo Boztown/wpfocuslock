@@ -4,6 +4,7 @@
 
 #focuslock-image-wrapper > img {
   cursor: crosshair;
+  max-width: 100%;
 }
 
 .focuslock-dot {
