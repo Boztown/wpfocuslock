@@ -3,6 +3,8 @@
 .focuspoint {
 	position: relative; /*Any position but static should work*/
 	overflow: hidden;
+	width: 100%;
+	height: 450px;
 }
 .focuspoint img {
 	position: absolute;
@@ -14,4 +16,6 @@
 	width: auto; height: auto;
 	min-width: 100%; min-height: 100%;
 	max-height: none; max-width: none;
+  transition: top .4s, left .4s;
+  transition-timing-function: ease;
 }

@@ -1,3 +1,5 @@
 jQuery(document).ready(function( $ ) {
-  $('.focuspoint').focusPoint();
+  $('.focuspoint').focusPoint({
+    throttleDuration: 1000
+  });
 });
