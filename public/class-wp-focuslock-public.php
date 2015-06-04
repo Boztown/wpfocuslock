@@ -54,8 +54,9 @@ class WP_FocusLock_Public {
 }
 
 
-function focuslock_image($attachment_id, $image_size = 'full', $additional_classes = '') {
+function focuslock_image($attachment_id, $image_size = 'full', $additional_classes = '', $width = null, $height = null) {
   $meta = wp_get_attachment_metadata( $attachment_id );
+  $style = '';
 
   if ($image_size == 'full') {
     $size = [];
@@ -65,12 +66,20 @@ function focuslock_image($attachment_id, $image_size = 'full', $additional_class
     $size = $meta['sizes'][$image_size];
   }
 
+  if ($width) {
+    $style .= 'width: ' . $width . ';';
+  }
+
+  if ($height) {
+    $style .= 'height: ' . $height . ';';
+  }
+
   $coords = get_post_meta($attachment_id, 'focuslock_coords', true);
 
   if ($coords) {
     $coords = explode('|', $coords);
 
-    $html = '<div class="focuspoint ' . $additional_classes . '" data-focus-x="' . $coords[0] . '" data-focus-y="' . $coords[1] . '" data-image-w="' . $size['width'] . '" data-image-h="' . $size['height'] . '">';
+    $html = '<div style="' . $style . '" class="focuspoint ' . $additional_classes . '" data-focus-x="' . $coords[0] . '" data-focus-y="' . $coords[1] . '" data-image-w="' . $size['width'] . '" data-image-h="' . $size['height'] . '">';
     $html .= wp_get_attachment_image( $attachment_id, $image_size );
     $html .= '</div>';
 

@@ -115,6 +115,18 @@ class WP_FocusLock_Admin {
       $classes = '';
     }
 
-    return focuslock_image($atts['id'], $size, $classes);
+    if (isset($atts['width'])) {
+      $width = $atts['width'];
+    } else {
+      $width = null;
+    }
+
+    if (isset($atts['height'])) {
+      $height = $atts['height'];
+    } else {
+      $height = null;
+    }
+
+    return focuslock_image($atts['id'], $size, $classes, $width, $height);
   }
 }
