@@ -66,11 +66,17 @@ function focuslock_image($attachment_id, $image_size = 'full', $additional_class
   }
 
   $coords = get_post_meta($attachment_id, 'focuslock_coords', true);
-  $coords = explode('|', $coords);
 
-  $html = '<div class="focuspoint ' . $additional_classes . '" data-focus-x="' . $coords[0] . '" data-focus-y="' . $coords[1] . '" data-image-w="' . $size['width'] . '" data-image-h="' . $size['height'] . '">';
-  $html .= wp_get_attachment_image( $attachment_id, $image_size );
-  $html .= '</div>';
+  if ($coords) {
+    $coords = explode('|', $coords);
 
-  echo $html;
+    $html = '<div class="focuspoint ' . $additional_classes . '" data-focus-x="' . $coords[0] . '" data-focus-y="' . $coords[1] . '" data-image-w="' . $size['width'] . '" data-image-h="' . $size['height'] . '">';
+    $html .= wp_get_attachment_image( $attachment_id, $image_size );
+    $html .= '</div>';
+
+    echo $html;
+  
+  } else {
+    echo '';
+  }
 }

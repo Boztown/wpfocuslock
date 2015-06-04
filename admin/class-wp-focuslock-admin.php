@@ -38,6 +38,8 @@ class WP_FocusLock_Admin {
     // Load admin JS & CSS
     add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_styles' ), 10, 1 );
     add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), 10, 1 );
+  
+    add_shortcode( 'focuslock', array( $this, 'focuslock_shortcode') );
   }
 
 
@@ -97,5 +99,22 @@ class WP_FocusLock_Admin {
    */
   public function admin_enqueue_scripts() {
     wp_enqueue_script( 'FocusLockAdminScripts', plugin_dir_url( __FILE__ ) . 'js/main.js', array('jquery'), $this->_version, true );
+  }
+
+  public function focuslock_shortcode( $atts , $content = null ) {
+    
+    if (isset($atts['size'])) {
+      $size = $atts['size'];
+    } else {
+      $size = 'large';
+    }
+
+    if (isset($atts['classes'])) {
+      $classes = $atts['classes'];
+    } else {
+      $classes = '';
+    }
+
+    return focuslock_image($atts['id'], $size, $classes);
   }
 }
