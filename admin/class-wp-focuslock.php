@@ -104,6 +104,7 @@ class WP_FocusLock {
     add_action('init', array( $this, 'init_hook'));
 
     add_filter( 'attachment_fields_to_edit', array( $this, 'media_field_setup' ), 10, 2 );
+    add_action( 'edit_attachment', array( $this, 'save_attachment') );
     
     // Load frontend JS & CSS
     //add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 10 );
@@ -147,6 +148,14 @@ class WP_FocusLock {
     $html .= '</div>'; // end image-wrapper
     $html .= '</div>'; // end focuslock-ui
 
+    $focuslock_coords = get_post_meta( $attachment->ID, 'focuslock_coords', true );
+    $form_fields['focuslock_coords'] = array(
+        'value' => $focuslock_coords ? $focuslock_coords : '',
+        'label' => __( 'Coords' ),
+        'input' => 'hidden',
+        'id' => 'fsdffs'
+    );
+
     $form_fields[ 'focus_lock' ] = array(
       'label' => __( 'Focus Lock' ),
       'input' => 'html',
@@ -154,6 +163,13 @@ class WP_FocusLock {
     );
 
     return $form_fields;
+  }
+
+  public function save_attachment( $attachment_id ) {
+      if ( isset( $_REQUEST['attachments'][$attachment_id]['focuslock_coords'] ) ) {
+          $focuslock_coords = $_REQUEST['attachments'][$attachment_id]['focuslock_coords'];
+          update_post_meta( $attachment_id, 'focuslock_coords', $focuslock_coords );
+      }
   }
 
   /**

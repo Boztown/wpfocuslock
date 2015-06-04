@@ -1,5 +1,7 @@
 jQuery(document).ready(function( $ ) {
 
+  var $hiddenCoordsField = $('[name$="[focuslock_coords]"]');
+
   $("#focuslock-image-wrapper > img").click(function (ev) {
     var mouseX = ev.offsetX;
     var mouseY = ev.offsetY;
@@ -19,6 +21,8 @@ jQuery(document).ready(function( $ ) {
             .css('top', mouseY - (size / 2) + 'px')
             .css('left', mouseX - (size / 2) + 'px');
     }
+
+    $hiddenCoordsField.val(mouseX + '|' + mouseY);
   });
 
 });
