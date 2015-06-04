@@ -58,6 +58,13 @@ class WP_FocusLock_Admin {
         'input' => 'hidden'
     );
 
+    $focuslock_mouse_coords = get_post_meta( $attachment->ID, 'focuslock_mouse_coords', true );
+    $form_fields['focuslock_mouse_coords'] = array(
+        'value' => $focuslock_mouse_coords ? $focuslock_mouse_coords : '',
+        'label' => __( 'Coords' ),
+        'input' => 'hidden'
+    );
+
     $form_fields[ 'focus_lock' ] = array(
       'label' => __( 'Focus Lock' ),
       'input' => 'html',
