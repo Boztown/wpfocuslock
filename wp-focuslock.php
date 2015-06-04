@@ -16,16 +16,18 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Load plugin class files
-require_once( 'admin/class-wp-focuslock.php' );
+require_once( 'class-wp-focuslock.php' );
+// require_once( 'admin/class-wp-focuslock-admin.php' );
+// require_once( 'public/class-wp-focuslock-public.php' );
 
 /**
- * Returns the main instance of BirdsEye_Plugin to prevent the need to use globals.
+ * Returns the main instance of WP_FocusLock to prevent the need to use globals.
  *
  * @since  1.0.0
  * @return object FocusLock_Plugin
  */
 function WP_FocusLock() {
-  $instance = WP_FocusLock::instance( __FILE__, '1.0.0' );
+  $instance = WP_FocusLock::instance( __FILE__ );
   return $instance;
 }
 
