@@ -41,7 +41,8 @@ class WP_FocusLock {
 
     require_once( 'admin/class-wp-focuslock-admin.php' );
     $a = new WP_FocusLock_Admin( __FILE__, $this->version );
-    //require_once( 'public/class-wp-focuslock-public.php' );
+    require_once( 'public/class-wp-focuslock-public.php' );
+    $b = new WP_FocusLock_Public( __FILE__, $this->version );
   }
 
 }

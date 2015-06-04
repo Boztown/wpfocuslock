@@ -2,7 +2,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class WP_FocusLock_Admin {
+class WP_FocusLock_Public {
 
   /**
    * The version number.
@@ -32,7 +32,7 @@ class WP_FocusLock_Admin {
    */
   public function __construct ( $file = '', $version = '1.0.0' ) {
     //add_action( 'wp_enqueue_scripts', array( $this, 'public_enqueue_styles' ), 10, 1 );
-    //add_action( 'wp_enqueue_scripts', array( $this, 'public_enqueue_scripts' ), 10, 1 );
+    add_action( 'wp_enqueue_scripts', array( $this, 'public_enqueue_scripts' ), 10, 1 );
   }
 
   /**
@@ -48,6 +48,6 @@ class WP_FocusLock_Admin {
    *
    */
   public function public_enqueue_scripts() {
-    wp_enqueue_script( 'FocusLockPublicScripts', plugin_dir_url( __FILE__ ) . 'js/main.js', array('jquery'), $this->_version, true );
+    wp_enqueue_script( 'jquery_focuspoint', plugin_dir_url( __FILE__ ) . 'js/jquery.focuspoint.min.js', array('jquery'), $this->_version, true );
   }
 }
