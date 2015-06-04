@@ -3,8 +3,16 @@ jQuery(document).ready(function( $ ) {
   var $hiddenCoordsField = $('[name$="[focuslock_coords]"]');
 
   $("#focuslock-image-wrapper > img").click(function (ev) {
+
+    var imageW = $(this).width();
+    var imageH = $(this).height();
+
     var mouseX = ev.offsetX;
     var mouseY = ev.offsetY;
+
+    var focusX = (mouseX/imageW - .5)*2;
+    var focusY = (mouseY/imageH - .5)*-2;
+
     var size = '22';
 
     if ($("#focuslock-image-wrapper > .focuslock-dot").length == 0) {
@@ -22,7 +30,7 @@ jQuery(document).ready(function( $ ) {
             .css('left', mouseX - (size / 2) + 'px');
     }
 
-    $hiddenCoordsField.val(mouseX + '|' + mouseY);
+    $hiddenCoordsField.val(focusX + '|' + focusY);
   });
 
 });
