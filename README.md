@@ -27,5 +27,15 @@ For a permanment fixture in a theme:
 An example of using an attachment ID from an ACF photo field:
 
 ```
-<?php focuslock_image(get_field('photo'), 'large', 'guy'\); ?>
+<?php focuslock_image(get_field('photo'), 'large', 'guy'); ?>
 ```
+
+An example of using the post's featured image:
+
+```
+<?php focuslock_image(get_post_thumbnail_id(), 'large', 'gal'); ?>
+```
+
+### Styles
+
+Focused images will naturally adopt a style with a __width of 100%__ and a __height of 450px__.  This default was chosen because a width/height is needed for anything to be displayed at all and this makes for a good example.  You can use the width/height attributes of the shortcode or function to change this.  You can also set an extra class and use CSS to set the dimensions (among other things).
