@@ -101,7 +101,7 @@ class WP_FocusLock_Admin {
    *
    */
   public function admin_enqueue_scripts() {
-    wp_enqueue_script( 'FocusLockAdminScripts', plugin_dir_url( __FILE__ ) . 'js/main.js', array('jquery'), $this->_version, true );
+    wp_enqueue_script( 'FocusLockAdminScripts', plugin_dir_url( __FILE__ ) . 'js/main.js', array('jquery'), $this->version, true );
   }
 
   public function focuslock_shortcode( $atts , $content = null ) {
