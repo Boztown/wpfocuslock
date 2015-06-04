@@ -8,7 +8,9 @@
 
 .focuslock-dot {
   position: absolute;
-  background: blue;
+  background: rgba(255,255,255,.3);
+  border: 3px solid white;
   border-radius: 30px;
-  opacity: .8;
+  transition: top .1s, left .1s;
+  transition-timing-function: ease;
 }
