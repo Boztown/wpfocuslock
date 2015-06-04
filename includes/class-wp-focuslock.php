@@ -161,8 +161,8 @@ class WP_FocusLock {
    *
    * @since    1.0.0
    */
-  public function enqueue_styles() {
+  public function admin_enqueue_styles() {
 
-    wp_enqueue_style( 'FocusLockAdminStyles', plugin_dir_url( __FILE__ ) . 'css/focuslock-admin.css', array(), $this->version, 'all' );
+    wp_enqueue_style( 'FocusLockAdminStyles', plugin_dir_url( __FILE__ ) . 'css/focuslock-admin.css', array(), $this->_version, 'all' );
   }
 }
