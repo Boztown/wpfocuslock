@@ -2,6 +2,13 @@ jQuery(document).ready(function( $ ) {
 
   var $hiddenCoordsField = $('[name$="[focuslock_coords]"]');
   var $hiddenMouseCoordsField = $('[name$="[focuslock_mouse_coords]"]');
+  var $imageWrapper = $('#focuslock-image-wrapper');
+  var dotSize = '22';
+
+  if ($hiddenMouseCoordsField.val().length > 0) {
+    var coords = $hiddenMouseCoordsField.val().split('|');
+    createDot(coords[1], coords[0]);
+  }
 
   $("#focuslock-image-wrapper > img").click(function (ev) {
 
@@ -14,28 +21,33 @@ jQuery(document).ready(function( $ ) {
     var focusX = (mouseX/imageW - .5)*2;
     var focusY = (mouseY/imageH - .5)*-2;
 
-    var size = '22';
+    var centeredMouseX = mouseX - (dotSize / 2);
+    var centeredMouseY = mouseY - (dotSize / 2);
 
-    var centeredMouseX = mouseX - (size / 2);
-    var centeredMouseY = mouseY - (size / 2);
-
-    if ($("#focuslock-image-wrapper > .focuslock-dot").length == 0) {
-      $("#focuslock-image-wrapper").append(
-        $('<div></div>')
-            .addClass('focuslock-dot')
-            .css('top', centeredMouseX + 'px')
-            .css('left', centeredMouseX + 'px')
-            .css('width', size + 'px')
-            .css('height', size + 'px')
-      );
+    if ($imageWrapper.find(".focuslock-dot").length == 0) {
+      createDot(centeredMouseY, centeredMouseX);
     } else {
-      $("#focuslock-image-wrapper > .focuslock-dot")
-            .css('top', mouseY - (size / 2) + 'px')
-            .css('left', mouseX - (size / 2) + 'px');
+      moveDot(mouseY - (dotSize / 2),mouseX - (dotSize / 2));
     }
 
     $hiddenCoordsField.val(focusX + '|' + focusY);
     $hiddenMouseCoordsField.val(centeredMouseX + '|' + centeredMouseY);
   });
+
+  function moveDot(top, left) {
+    $imageWrapper.find(".focuslock-dot")
+    .css('top', top + 'px')
+    .css('left', left + 'px');    
+  }
+
+  function createDot(top, left) {
+    $imageWrapper.append(
+      $('<div></div>')
+          .addClass('focuslock-dot')
+          .css('top', top + 'px')
+          .css('left', left + 'px')
+          .css('width', dotSize + 'px')
+          .css('height', dotSize + 'px'))    
+  }
 
 });

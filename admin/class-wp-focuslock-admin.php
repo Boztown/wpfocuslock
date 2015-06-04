@@ -77,7 +77,9 @@ class WP_FocusLock_Admin {
   public function save_attachment( $attachment_id ) {
       if ( isset( $_REQUEST['attachments'][$attachment_id]['focuslock_coords'] ) ) {
           $focuslock_coords = $_REQUEST['attachments'][$attachment_id]['focuslock_coords'];
+          $focuslock_mouse_coords = $_REQUEST['attachments'][$attachment_id]['focuslock_mouse_coords'];
           update_post_meta( $attachment_id, 'focuslock_coords', $focuslock_coords );
+          update_post_meta( $attachment_id, 'focuslock_mouse_coords', $focuslock_mouse_coords );
       }
   }
 
