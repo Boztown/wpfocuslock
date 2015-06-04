@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: WP Focus Lock
- * Version: 0.4
+ * Version: 0.1
  * Plugin URI: http://www.neota.net
  * Description: Lock down that FOCUS.
  * Author: Ryan Bosinger @ Neota Inc.
@@ -17,13 +17,10 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Load plugin class files
 require_once( 'class-wp-focuslock.php' );
-// require_once( 'admin/class-wp-focuslock-admin.php' );
-// require_once( 'public/class-wp-focuslock-public.php' );
 
 /**
  * Returns the main instance of WP_FocusLock to prevent the need to use globals.
  *
- * @since  1.0.0
  * @return object FocusLock_Plugin
  */
 function WP_FocusLock() {

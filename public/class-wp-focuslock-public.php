@@ -9,7 +9,7 @@ class WP_FocusLock_Public {
    * @var     string
    * @access  public
    */
-  public $_version;
+  public $version;
 
   /**
    * The main plugin file.
@@ -19,18 +19,15 @@ class WP_FocusLock_Public {
   public $file;
 
   /**
-   * The main plugin directory.
-   * @var     string
-   * @access  public
-   */
-  public $dir;
-
-  /**
    * Constructor function.
    * @access  public
    * @return  void
    */
   public function __construct ( $file = '', $version = '1.0.0' ) {
+
+    $this->version = $version;
+    $this->file = $file;
+    
     add_action( 'wp_enqueue_scripts', array( $this, 'public_enqueue_styles' ), 10, 1 );
     add_action( 'wp_enqueue_scripts', array( $this, 'public_enqueue_scripts' ), 10, 1 );
   }

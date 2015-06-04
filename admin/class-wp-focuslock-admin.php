@@ -9,7 +9,7 @@ class WP_FocusLock_Admin {
    * @var     string
    * @access  public
    */
-  public $_version;
+  public $version;
 
   /**
    * The main plugin file.
@@ -31,6 +31,9 @@ class WP_FocusLock_Admin {
    * @return  void
    */
   public function __construct ( $file = '', $version = '1.0.0' ) {
+
+    $this->version = $version;
+    $this->file = $file;
 
     add_filter( 'attachment_fields_to_edit', array( $this, 'media_field_setup' ), 10, 2 );
     add_action( 'edit_attachment', array( $this, 'save_attachment') );

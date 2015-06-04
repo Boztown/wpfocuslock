@@ -9,24 +9,29 @@ class WP_FocusLock {
   /**
    * The unique identifier of this plugin.
    *
-   * @since    1.0.0
    * @access   protected
    * @var      string    $plugin_name    The string used to uniquely identify this plugin.
    */
   protected $plugin_name;
 
   /**
+   * The main plugin file.
+   * @var     string
+   * @access  public
+   */
+  public $file;
+
+  /**
    * The current version of the plugin.
    *
-   * @since    1.0.0
    * @access   protected
    * @var      string    $version    The current version of the plugin.
    */
   protected $version;
 
-  public function __construct() {
+  public function __construct( $file, $version ) {
     $this->plugin_name = 'wp-focuslock';
-    $this->version = '0.1';
+    $this->version = $version;
     $this->load_dependencies();
   }
 
@@ -40,9 +45,9 @@ class WP_FocusLock {
   private function load_dependencies() {
 
     require_once( 'admin/class-wp-focuslock-admin.php' );
-    $a = new WP_FocusLock_Admin( __FILE__, $this->version );
+    $admin = new WP_FocusLock_Admin( __FILE__, $this->version );
     require_once( 'public/class-wp-focuslock-public.php' );
-    $b = new WP_FocusLock_Public( __FILE__, $this->version );
+    $public = new WP_FocusLock_Public( __FILE__, $this->version );
   }
 
 }
