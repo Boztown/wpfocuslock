@@ -8,7 +8,7 @@
  * Author URI: http://www.neota.net
  * Requires at least: 4.0
  * Tested up to: 4.0
- *
+ * GitHub Plugin URI: Boztown/wpfocuslock
  * Text Domain: wp-focuslock
  * Domain Path: /lang/
  */
