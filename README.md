@@ -18,10 +18,10 @@ For a better idea of what this does check out this demo from the jQuery FocusPoi
 
 ### Function Call
 
-For a permanment fixture in a theme:
+For a permanent fixture in a theme:
 
 ```
-<?php focuslock_image(135, 'large', 'guy'', '100%', '500px'); ?>
+<?php focuslock_image(135, 'large', 'guy', '100%', '500px'); ?>
 ```
 
 An example of using an attachment ID from an ACF photo field:
