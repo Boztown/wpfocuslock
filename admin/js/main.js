@@ -21,12 +21,13 @@ if ( ! window.console )
     if (!focusLockedInited) {
       setElements();
 
-      if ($hiddenMouseCoordsField && $hiddenMouseCoordsField.val().length > 0) {
-        var coords = $hiddenMouseCoordsField.val().split('|');
-        createDot(coords[1], coords[0]);
+      if ($hiddenMouseCoordsField.length > 0) {
+        if ($hiddenMouseCoordsField.val().length > 0) {
+          var coords = $hiddenMouseCoordsField.val().split('|');
+          createDot(coords[1], coords[0]);
+          focusLockedInited = true;  
+        }
       }
-
-      focusLockedInited = true;  
     }  
   }
 
