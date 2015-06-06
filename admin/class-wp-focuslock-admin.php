@@ -43,6 +43,9 @@ class WP_FocusLock_Admin {
     add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), 10, 1 );
   
     add_shortcode( 'focuslock', array( $this, 'focuslock_shortcode') );
+
+    add_action( 'wp_ajax_get_focus_points', array( $this, 'get_focus_points' ) );
+    add_action( 'wp_ajax_save_focus_points', array( $this, 'save_focus_points' ) );
   }
 
 
@@ -51,9 +54,14 @@ class WP_FocusLock_Admin {
     $image = wp_get_attachment_image_src( $attachment->ID, 'medium' );
 
     $html = '<div class="focuslock-ui hide-if-no-js">';
-    $html = '<div id="focuslock-image-wrapper" class="image-wrapper">';
-    $html .= '<img src="' . $image[0] . '" />';
+    $html .= '<div class="focuslock-image-wrapper image-wrapper locked">';
+    $html .= '<img src="' . $image[0] . '" data-attachment-id="' . $attachment->ID . '" />';
     $html .= '</div>'; // end image-wrapper
+    $html .= '<hr>';
+    $html .= '<button class="button edit-focuslock" type="button" data-attachment-id="' . $attachment->ID . '">Edit Focus Lock</button>';
+    $html .= '<button class="button save-focuslock" type="button" data-attachment-id="' . $attachment->ID . '">Save</button>';
+    $html .= '<button class="button cancel-focuslock" type="button">Cancel</button>';
+    $html .= '<p class="saved-message">Saved.</p>';
     $html .= '</div>'; // end focuslock-ui
 
     $focuslock_coords = get_post_meta( $attachment->ID, 'focuslock_coords', true );
@@ -79,6 +87,34 @@ class WP_FocusLock_Admin {
     return $form_fields;
   }
 
+  public function get_focus_points() {
+    $att_id = isset( $_POST[ 'attachment_id' ] ) ? intval( $_POST[ 'attachment_id' ] ) : false;
+
+    if ( $att_id ) {
+
+      $focuslock_coords = get_post_meta( $att_id, 'focuslock_coords', true );
+      $focuslock_mouse_coords = get_post_meta( $att_id, 'focuslock_mouse_coords', true );
+
+      $response = array(
+        'focuslock_coords' => $focuslock_coords,
+        'focuslock_mouse_coords' => $focuslock_mouse_coords
+      );
+    }
+
+    $this->send_json( $response );
+  }
+
+  public function save_focus_points() {
+    $attachment_id = isset( $_POST[ 'attachment_id' ] ) ? intval( $_POST[ 'attachment_id' ] ) : false;
+
+    if ( $attachment_id ) {
+      $focuslock_coords = $_POST['focuslock_coords'];
+      $focuslock_mouse_coords = $_POST['focuslock_mouse_coords'];
+      update_post_meta( $attachment_id, 'focuslock_coords', $focuslock_coords );
+      update_post_meta( $attachment_id, 'focuslock_mouse_coords', $focuslock_mouse_coords );
+    }
+  }
+
   public function save_attachment( $attachment_id ) {
       if ( isset( $_REQUEST['attachments'][$attachment_id]['focuslock_coords'] ) ) {
           $focuslock_coords = $_REQUEST['attachments'][$attachment_id]['focuslock_coords'];
@@ -86,6 +122,12 @@ class WP_FocusLock_Admin {
           update_post_meta( $attachment_id, 'focuslock_coords', $focuslock_coords );
           update_post_meta( $attachment_id, 'focuslock_mouse_coords', $focuslock_mouse_coords );
       }
+  }
+
+  public function send_json( $response ) {
+    header( 'Content-type: application/json' );
+    echo json_encode( $response );
+    exit;
   }
 
   /**

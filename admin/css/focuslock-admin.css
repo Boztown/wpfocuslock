@@ -1,8 +1,21 @@
-#focuslock-image-wrapper {
+.focuslock-image-wrapper {
   position: relative;
 }
 
-#focuslock-image-wrapper > img {
+.focuslock-image-wrapper.locked {
+  opacity: 0.3;
+}
+
+.focuslock-ui > .cancel-focuslock,
+.focuslock-ui > .save-focuslock {
+  display: none;
+}
+
+.saved-message {
+  display: none;
+}
+
+.focuslock-image-wrapper > img {
   cursor: crosshair;
   max-width: 100%;
 }
