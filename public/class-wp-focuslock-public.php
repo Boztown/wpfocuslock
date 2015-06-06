@@ -83,6 +83,11 @@ function focuslock_image($attachment_id, $image_size = 'full', $additional_class
     echo $html;
   
   } else {
-    echo '';
+
+    $html = '<div style="' . $style . '" class="focuspoint ' . $additional_classes . '">';
+    $html .= wp_get_attachment_image( $attachment_id, $image_size );
+    $html .= '</div>';
+
+    echo $html;
   }
 }
