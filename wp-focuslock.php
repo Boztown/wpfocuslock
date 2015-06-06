@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: WP Focus Lock
- * Version: 0.2
+ * Version: 0.3
  * Plugin URI: http://www.neota.net
  * Description: Lock down that FOCUS.
  * Author: Ryan Bosinger @ Neota Inc.
