@@ -37,7 +37,7 @@ class WP_FocusLock {
 
   public static function instance ( $file = '' ) {
     if ( is_null( self::$_instance ) ) {
-      self::$_instance = new self( $file, '0.3' );
+      self::$_instance = new self( $file, '0.4' );
     }
     return self::$_instance;
   }
