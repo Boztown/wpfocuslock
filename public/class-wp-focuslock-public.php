@@ -52,6 +52,12 @@ class WP_FocusLock_Public {
 
 
 function focuslock_image($attachment_id, $image_size = 'full', $additional_classes = '', $width = null, $height = null) {
+  
+  if (empty($attachment_id)) {
+    echo '';
+    return;
+  }
+
   $meta = wp_get_attachment_metadata( $attachment_id );
   $style = '';
 
