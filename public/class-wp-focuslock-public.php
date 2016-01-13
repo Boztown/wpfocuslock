@@ -45,8 +45,8 @@ class WP_FocusLock_Public {
    *
    */
   public function public_enqueue_scripts() {
-    wp_enqueue_script( 'jquery_focuspoint', plugin_dir_url( __FILE__ ) . 'js/jquery.focuspoint.min.js', array('jquery'), $this->_version, true );
-    wp_enqueue_script( 'wp_focuslock', plugin_dir_url( __FILE__ ) . 'js/wp-focuslock.js', array('jquery', 'jquery_focuspoint'), $this->_version, true );
+    wp_enqueue_script( 'jquery_focuspoint', plugin_dir_url( __FILE__ ) . 'js/jquery.focuspoint.min.js', array('jquery'), $this->version, true );
+    wp_enqueue_script( 'wp_focuslock', plugin_dir_url( __FILE__ ) . 'js/wp-focuslock.js', array('jquery', 'jquery_focuspoint'), $this->version, true );
   }
 }
 
